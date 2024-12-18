@@ -97,7 +97,7 @@ class WorkerThread(QThread):
             self.payload3_input.text()
         ]
         示例cookie,token:
-        "Cookie": "access_token=skF9EdTmSieGDtaX2S59lA; SESSION=20ed3dc4-767f-434a-805d-60ba4a0e1a27; authcode=2022201476;"
+        "Cookie": "access_token=skF9EdTmSieGDtaX2S59lA; SESSION=20ed3dc4-767f-434a-805d-60ba4a0e1a27; authcode=2022206666;"
         "Token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2MiOiIyMDIyMjAxNDc2IiwiZXhwIjoxNzI2MzQzNzM1LCJzaWQiOiIyMGVkM2RjNC03NjdmLTQzNGEtODA1ZC02MGJhNGEwZTFhMjcifQ.MBPTiBlLx1uUdt4dpF2Jfsgj_Yr2-KqHtF97JvDS_P8"
         '''
         url = "https://jw.ruc.edu.cn/resService/jwxtpt/v1/xsd/stuCourseCenterController/saveStuXkByRmdx?resourceCode=XSMH0303&apiCode=jw.xsd.courseCenter.controller.StuCourseCenterController.saveStuXkByRmdx"
