@@ -1,0 +1,2 @@
+本软件是在师兄开发的软件基础上开发的
+源项目地址：https://github.com/Meteors27/RUC-Course-Automatization
