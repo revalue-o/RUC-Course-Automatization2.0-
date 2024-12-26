@@ -25,10 +25,6 @@ https://fly63.com/tool/taag/
                                                                                                  
                                                                                                  
 '''
-'''
-TODO
-现已知微人大只会在整五分的时候释放课程名额，待更新逻辑减少总选课次数，仅在整五分时选课
-'''
 import sys
 import time
 import random
