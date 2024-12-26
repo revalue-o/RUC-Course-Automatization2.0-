@@ -38,6 +38,7 @@ from PyQt5.QtCore import QThread, pyqtSignal
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QHBoxLayout, QLineEdit, QPushButton, QTextEdit, QLabel
 import os
 import json
+from datetime import datetime
 os.chdir(os.path.dirname(__file__))
 
 class WorkerThread(QThread):
@@ -48,7 +49,18 @@ class WorkerThread(QThread):
         super().__init__()
         self.payloads = payloads
         self.succeed_payload = []
-
+    def in_time_of_interest(self):
+        # 获取当前时间
+        now = datetime.now()
+        
+        # 获取当前的分钟和秒数
+        current_minute = now.minute
+        current_second = now.second
+        
+        # 判断分钟是否是5的倍数，秒数是否在0-20秒之间
+        if current_minute % 5 == 0 and 0 <= current_second <= 30:
+            return True
+        return False
     def run(self):
         # 在后台线程中运行长时间操作
         count = 0
@@ -82,6 +94,7 @@ class WorkerThread(QThread):
             print("转换失败")
             return {}
         return final_dict
+
 
     def send_xk_request(self,payloads):
         # 这里是模拟的函数内容，可以根据需要替换成实际的逻辑
@@ -142,6 +155,9 @@ class WorkerThread(QThread):
         responses=""
         count=0
         display="未知错误"
+        if self.in_time_of_interest()==False:
+            display="微人大只会在整五分钟放课，当前不在选课时间内，等待下一个整五分\n"
+            return display
         if len(self.succeed_payload)==len(xk_list):
             display="全部选课成功，可以关闭程序了\n"
             return display
@@ -164,7 +180,7 @@ class WorkerThread(QThread):
             elif "The Claim 'sid' value doesn't match the required one" in responses:
                 display=f"payload{str(count)}的token或cookie已失效，请重新获取token或cookie\n"
 
-            time.sleep(random.randint(2,6))
+            time.sleep(random.randint(1,4))
         print(responses)
         with open("./log.txt","a") as f:
             f.write(responses)

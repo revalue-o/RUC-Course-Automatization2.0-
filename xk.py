@@ -1,5 +1,20 @@
 import requests
 import time
+import datetime
+
+
+def in_time_of_interest(self):
+    # 获取当前时间
+    now = datetime.now()
+        
+    # 获取当前的分钟和秒数
+    current_minute = now.minute
+    current_second = now.second
+        
+    # 判断分钟是否是5的倍数，秒数是否在0-20秒之间
+    if current_minute % 5 == 0 and 0 <= current_second <= 30:
+        return True
+    return False
 
 
     # "Cookie": "access_token=skF9EdTmSieGDtaX2S59lA; SESSION=20ed3dc4-767f-434a-805d-60ba4a0e1a27; authcode=2022206666;",
@@ -141,11 +156,15 @@ def convert_values(data):
 def main():
     count=0
     while True:
-        print(type(new_data))
+      if not in_time_of_interest():
+        print("微人大只会在整五分钟放课，当前不在选课时间内，等待下一个整五分")
+        time.sleep(1)
+        continue
+      print(type(new_data))
         
-        response = requests.post(url, headers=headers, json=new_data)
-        print(response.text)
-        time.sleep(3)
+      response = requests.post(url, headers=headers, json=new_data)
+      print(response.text)
+      time.sleep(3)
 
 
 
